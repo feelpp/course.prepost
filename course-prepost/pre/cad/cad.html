@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Computer Aided Design (CAD) :: PrePost Processing for Scientific Computing</title>
+    <link rel="canonical" href="https://trophime.github.io/CSMI-PrePost/course-prepost/pre/cad/cad.html">
+    <meta name="generator" content="Antora 3.1.8">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+<script>!function(l,p){if(l.protocol!==p&&l.host=="docs.antora.org"){l.protocol=p}else if(/\.gitlab\.io$/.test(l.host)){l.replace(p+"//docs.antora.org"+l.pathname.substr(l.pathname.indexOf("/",1))+l.search+l.hash)}}(location,"https:")</script>
+
+<script src="../../../_/js/vendor/tabs-block-extension.js"></script>
+<script src="../../../_/js/vendor/tabs-block-behavior.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+
+  TeX: {
+      Macros: {
+      bold: ["{\\bf #1}",1],
+      calTh: "{\\mathcal{T}_h}",
+      card: ["{\\operatorname{card}(#1)}",1],
+      card: ["{\\operatorname{card}(#1)}",1],
+      Ck: ["{\\mathcal{C}^{#1}}",1],
+      deformt: ["{\\mathbf{\\varepsilon(#1)}}",1],
+      diam: "{\\operatorname{diam}}",
+      dim: ["{\\operatorname{dim}(#1)}",1],
+      disp: ["{\\mathbf{#1}}",1],
+      domain: "{\\Omega}",
+      ds: "",
+      essinf: "{\\operatorname{ess}\\, \\operatorname{inf}}",
+      F:"{\\mathcal{F}}",
+      geo: "{\\mathrm{geo}}",
+      Ich: ["{\\mathcal{I}^{#1}_{c,h}#2}",2],
+      Id: "{\\mathcal{I}}",
+      Ilag: ["{\\mathcal{I}^{\\mathrm{lag}}_{#1}}",1],
+      jump: ["{[\\![ #1 ]\\!]}",1],
+      n:"{\\mathbf{n}}",
+      Ne: "{N_{\\mathrm{e}}}",
+      Next: "{\\mathrm{n}}",
+      nf: "{n_f}",
+      ngeo: "{n_{\\mathrm{geo}}}",
+      Nma: "{N_{\\mathrm{ma}}}",
+      NN: "{\\mathbb N}",
+      Nno: "{N_{\\mathrm{no}}}",
+      Nso: "{N_{\\mathrm{so}}}",
+      opdim: "{\\operatorname{dim}}",
+      p: "{\\mathrm{p}}",
+      P:"{\\mathcal{P}}",
+      Pch: ["{P^{#1}_{c,h}}",1],
+      Pcho: ["{P^{#1}_{c,h,0}}",1],
+      Pk: ["{\\mathcal{P}^{#1}}",1],
+      poly: ["{\\mathbb{#1}",1],
+      poly: ["{\\mathbb{#1}}",1],
+      prect: ["{\\left\\(#1\\right\\)}",1],
+      q:"{\\mathbf{q}}",
+      Qch: ["{Q^{#1}_{c,h}}",1],
+      Qk: ["{\\mathcal{Q}^{#1}}",1],
+      R: ["{\\mathbb{R}^{#1}}",1],
+      RR: "{\\mathbb R}",
+      set: ["{\\left\\{#1\\right\\}}",1],
+      stresst: ["{\\mathbf{\\sigma(#1)}}",1],
+      T:"{\\mathcal{T}}",
+      tr: "{\\operatorname{tr}}",
+      v:"{\\mathbf{v}}",
+      vertiii: ["\\left\\vert\\kern-0.25ex\\left\\vert\\kern-0.25ex\\left\\vert #1 \\right\\vert\\kern-0.25ex\\right\\vert\\kern-0.25ex\\right\\vert",1]
+  },
+  extensions: ["mhchem.js"] 
+  }
+});
+</script>
+<!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>-->
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML'></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.0/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>-->
+
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" integrity="sha384-TEMocfGvRuD1rIAacqrknm5BQZ7W7uWitoih+jMNFXQIbNl16bO8OZmylH/Vi/Ei" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js" integrity="sha384-jmxIlussZWB7qCuB+PgKG1uLjjxbVVIayPJwi6cG6Zb4YKq0JIw+OMnkkEC7kYCq" crossorigin="anonymous"></script>-->
+<script>var uiRootPath = '../../../_'</script>
+
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar  navbar-expand-sm bg-dark navbar-dark">
+    <div class="navbar-brand">
+      <div class="navbar-item feelpp-logo">
+        <a href="https://trophime.github.io/CSMI-PrePost"><img src="../../../_/img/feelpp-logo.svg" alt="Feel++ logo"/></a>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item search hide-for-print">
+          <form class="search">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" placeholder="Search PrePost Processing for Scientific Computing" class="query" id="search-query">
+          </form>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-link">Manuals</div>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://docs.feelpp.org/user/">User</a>
+            <a class="navbar-item" href="https://docs.feelpp.org/dev/">Developer</a>
+            <a class="navbar-item" href="https://docs.feelpp.org/toolbox/">Toolbox</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-link" data-title="Support">
+            <span class="icon"><img src="../../../_/img/octicons-24.svg#view-comment-discussion"></span>
+          </div>
+          <div class="navbar-dropdown is-right">
+            <a class="navbar-item has-icon" href="https://join.slack.com/t/feelpp/shared_invite/zt-2qe0q9hw-4pVbhohCXUE6Po9Ma8dbiQ" target="_blank" rel="noopener">
+              <span class="icon"><img src="../../../_/img/slack-icon.svg"></span>
+              <span>Chat</span>
+            </a>
+            <a class="navbar-item has-icon" href="https://github.com/orgs/feelpp/discussions" target="_blank" rel="noopener">
+              <span class="icon"><img src="../../../_/img/octicons-16.svg#view-discussion-closed"></span>
+              <span>Discussions</span>
+            </a>
+            <a class="navbar-item has-icon" href="https://github.com/feelpp" target="_blank" rel="noopener">
+              <span class="icon"><img src="../../../_/img/octicons-16.svg#view-mark-github"></span>
+              <span>Source</span>
+            </a>
+            <a class="navbar-item has-icon" href="https://twitter.com/feelpp" target="_blank" rel="noopener">
+              <span class="icon"><img src="../../../_/img/octicons-16.svg#view-hash"></span>
+              <span>Tweets</span>
+            </a>
+            <a class="navbar-item has-icon" href="https://github.com/feelpp/book.feelpp.org/issues/new">
+              <span class="icon"><img src="../../../_/img/octicons-16.svg#view-bug"></span>
+              <span>Issues</span>
+            </a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable download-item">
+        </div>
+        <div class="navbar-item">
+          <a class="navbar-brand"  href="https://www.cemosis.fr">
+            <img class="cemosis-logo"  src="../../../_/img/cemosis-logo.svg" alt="Cemosis logo"/>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<a href="#" class="menu-expand-toggle"></a>
+<div class="nav-container" data-component="course-prepost" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../../index.html">PrePost Processing for Scientific Computing</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../index.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../domain.html">Domain modeling and representation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../pre.html">PreProcessing</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="cad.html">Computer Aided Design (CAD)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../mesh/mesh.html">Preprocessing Mesh</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">PostProcessing</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../post/post.html">PostProcessing</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Setting up the development Environment</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../env/antora.html">Antora Environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../env/vscode.html">VS Code Integration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../env/gmsh.html">Gmsh</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../env/salome.html">Salome</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../env/feelpp.html">Feel++</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../env/container.html">Containers</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../env/jupyter.html">Jupyter Notebook</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">References</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../software.html">Software</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../books.html">books</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../acknowledgements.html">Acknowledgements</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../exos/index.html">Exercices</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../exos/gmsh/simple.html">Gmsh </a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../exos/gmsh/occ.html">Gmsh with OpenCascade</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../exos/gmsh/mesh.html">Gmsh - first meshes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../exos/gmsh/adapt.html">Gmsh - adapt meshes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../exos/salome/simple.html">Salome CAD Modeler</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../exos/salome/mesh.html">Salome Netgen Mesher</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">PrePost Processing for Scientific Computing</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+      <li class="component is-current">
+        <a class="title" href="../../index.html">PrePost Processing for Scientific Computing</a>
+      </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+  <button class="nav-toggle"></button>
+    <a href="../../index.html" class="home-link"></a>
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">PrePost Processing for Scientific Computing</a></li>
+    <li><a href="../../pre.html">PreProcessing</a></li>
+    <li><a href="cad.html">Computer Aided Design (CAD)</a></li>
+  </ul>
+</nav>
+
+  
+    <div class="edit-this-page"><a href="https://github.com/Trophime/CSMI-PrePost/edit/master/docs/modules/ROOT/pages/pre/cad/cad.adoc">Edit this Page</a></div>
+  
+  <div class="page-downloads">
+  <span class="label">Download as</span>
+  <ul class="download-options">
+    <li>
+      <a onclick="print(this)" href="#" data-toggle="tooltip" data-placement="left" title="Print to PDF"
+         class="pdf-download">
+        <img class="pdf-file-icon icon" src="../../../_/img/pdf.svg"/> .pdf
+      </a>
+    </li>
+  </ul>
+</div>
+</div>
+
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Computer Aided Design (CAD)</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Covers the creation of geometry:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2 approaches to create geometry:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Bottom-up approach: from points to surfaces and volumes,</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="videoblock">
+<div class="content">
+<iframe width="960" height="569" src="https://www.youtube.com/embed/dywdlaaE1U8?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Constructive Solid Geometry (CGS) approach: use boolean operation,</p>
+</li>
+</ul>
+</div>
+<div class="videoblock">
+<div class="content">
+<iframe width="960" height="569" src="https://www.youtube.com/embed/nkuawZkiu1w?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples are take from <a href="https://gmsh.info/screencasts/">Gmsh screencasts.</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_goals"><a class="anchor" href="#_goals"></a>1. Goals</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>What we will learn?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>create geometry</p>
+</li>
+<li>
+<p>automate creation</p>
+</li>
+<li>
+<p>define tags or ids to "identify" volumes/surfaces and "boundaries"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Practise with Gmsh and Salome</p>
+<div class="ulist">
+<ul>
+<li>
+<p>use GUI and TUI/API mode</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cad_ecosystem"><a class="anchor" href="#_cad_ecosystem"></a>2. CAD ecosystem</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Gives an oveview of</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Software</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Commercial: Catia, Seimens Nx, SolidWorks, &#8230;&#8203;</p>
+</li>
+<li>
+<p>OpenSource: FreeCad, Salome</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Main formats:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>STL</p>
+</li>
+<li>
+<p>Brep</p>
+</li>
+<li>
+<p>Xao</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bottom_up_approach"><a class="anchor" href="#_bottom_up_approach"></a>3. Bottom-up approach</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Use of Gmsh with builtin kernel</p>
+</div>
+<div class="sect2">
+<h3 id="_basic_usage_a_square"><a class="anchor" href="#_basic_usage_a_square"></a>3.1. Basic Usage: a square</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">setFactory("Built-in"); <i class="conum" data-value="1"></i><b>(1)</b>
+
+h = 1; <i class="conum" data-value="2"></i><b>(2)</b>
+Point(1) = {0, 0, 0, h};  <i class="conum" data-value="3"></i><b>(3)</b>
+Point(2) = {10, 0, 0, h};
+Point(3) = {10, 10, 0, h};
+Point(4) = {0, 10, 0, h};
+Line(1) = {1,2};  <i class="conum" data-value="4"></i><b>(4)</b>
+Line(2) = {2,3};
+Line(3) = {3,4};
+Line(4) = {4,1};
+Curve Loop(1) = {1,2,3,4};  <i class="conum" data-value="5"></i><b>(5)</b>
+Plane Surface(1) = {1}; <i class="conum" data-value="6"></i><b>(6)</b>
+Physical Surface(1) = {1}; <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Use Built-in kernel, aka Bottom-up approach</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Characteristic length of a mesh element</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Point construction</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Lines</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>A Boundary</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>A Surface</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Setting a label to the Surface</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To view the geometry:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In GMSH, go to files&#8594;open (CTRL+o) and open the file, or type gmsh square.geo in a terminal (warning: this open a new instance of GMSH (which is very light by the way!)). A square should have appear in GMSH’s windows.</p>
+</li>
+<li>
+<p>The camera can be adjusted using the mouse: rotating (left click), translating (right click) or zooming (wheel). At bottom left of GMSH’s windows, camera can be reseted using X,Y,Z and 1:1 (scale) buttons.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The square can now be meshed by typing 2 on the keyboard (or maybe shift + 2) or using the menu: Mesh&#8594;2D
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>add parameters for GUI mode</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">...
+h =DefineNumber[ 0.1, Name "Parameters/MeshSize" ]; <i class="conum" data-value="1"></i><b>(1)</b>
+dx = DefineNumber[ 0.1, Name "Parameters/dx" ];
+
+Point(1) = {0, 0, 0, h};  <i class="conum" data-value="2"></i><b>(2)</b>
+Point(2) = {dx, 0, 0, h};
+...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>define a 'MeshSize' parameter,</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>use 'dx' parameter in Point(2) definition</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For more infos on parameters, see this <a href="https://gitlab.onelab.info/doc/tutorials/-/wikis/ONELAB-syntax-for-Gmsh-and-GetDP">doc</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>"academic" cube</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Comment out the last line in the geo file
+Perform an elevation of Surface 1 to get a cube.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">...
+dz = DefineNumber[ 0.1, Name "Parameters/dz" ];
+
+out[] = Extrude {0, 0, dz} {Surface{1};}; <i class="conum" data-value="1"></i><b>(1)</b>
+
+Physical Surface("Top") = {1};
+Physical Surface("Bottom") = {out[0]};
+Physical Surface("Other") = {out[2], out[3], out[4], out[5]};
+Physical Volume("Cube") = {out[1]};</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Note how we retrieve the volume number programatically
+by using the return value (a list) of the Extrude command. This list contains:
+<div class="ulist">
+<ul>
+<li>
+<p>the "top" of the extruded surface (in 'out[0]''),</p>
+</li>
+<li>
+<p>the newly created volume (in 'out[1]'')</p>
+</li>
+<li>
+<p>and the ids of the lateral surfaces (in 'out[2]'', 'out[3]', &#8230;&#8203;)</p>
+</li>
+</ul>
+</div></td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_academic_cube_with_hole"><a class="anchor" href="#_academic_cube_with_hole"></a>3.2. "academic" cube with hole</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">...
+r =DefineNumber[ 0.1, Name "Parameters/HoleRadius" ];
+
+Point(5) = {dx/2.-r, 0, 0, h/4.};   <i class="conum" data-value="1"></i><b>(1)</b>
+Point(6) = {dx/2., dy/2.+r, 0, h/4.};
+Point(7) = {-dx/2.-r, 0, 0, h/4.};
+Point(8) = {-dx/2.-r, -dy/2.-r, 0, h/4.};
+Point(10) = {dx/2., dy/2., 0, h/4.};
+
+Circle(5) = {5,1O,6};
+...
+Curve Loop(2) = {5, 6, 7, 8}; <i class="conum" data-value="2"></i><b>(2)</b>
+
+Plane Surface(1) = {1, -2}; <i class="conum" data-value="3"></i><b>(3)</b>
+...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Create a disk</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Create a Curve Loop for the hole</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Create the surface: square with a hole, Note the sign before curve loop 2</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Exercise:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Perform the elevation</p>
+</li>
+<li>
+<p>Assign the Physical ids</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_academic_cube_with_holes"><a class="anchor" href="#_academic_cube_with_holes"></a>3.3. "academic" cube with holes</h3>
+<div class="paragraph">
+<p>Create a function to define the hole with a radius r centered on (x0, y0, 0)
+Store the Line Loop in an array</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Macro CHole
+    O=newp; Point(O) = {x0,y0,0,h};
+    p1=newp; Point(p1) = { x0+r,  y0, 0, h_h};
+    p2=newp; Point(p2) = { x0+0,  y0+r, -dz, h_h};
+    p3=newp; Point(p3) = { x0-r,  y0, -dz, h_h};
+    p4=newp; Point(p4) = { x0+0, y0-r, -dz, h_h};
+
+    c1=newl; Circle(c1) = {p1,O,p2};
+    c2=newl; Circle(c2) = {p2,O,p3};
+    c3=newl; Circle(c3) = {p3,O,p4};
+    c4=newl; Circle(c4) = {p4,O,p1};
+
+    loop[t]=newl; Line Loop(loop[t]) = {c1, c2, c3, c4}; t += 1;
+Return</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use the macro to create the geometry</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">...
+nx =DefineNumber[ 1, Name "Parameters/HoleNumbersAlongOX" ];
+ny =DefineNumber[ 1, Name "Parameters/HoleNumbersAlongOY" ];
+
+t = 0; loop[] = {};
+Macro CHole
+    ...
+Return
+
+For i In {1:nx}
+    x0 = -dx/(2*nx) + (i-1) * dx/nx;
+    For j In {1:ny}
+        y0 = -dy/(2*ny) + (j-1) * dy/ny;
+        Call CHole;
+    EndFor
+EndFor
+
+bord = newl; Plane Surface(bord) = {1, -loop[]};
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Exercise:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Perform the elevation</p>
+</li>
+<li>
+<p>Assign the Physical ids</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cgs_approach"><a class="anchor" href="#_cgs_approach"></a>4. CGS approach</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Use of Gmsh with OpenCascade kernel</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">setFactory("Built-in"); <i class="conum" data-value="1"></i><b>(1)</b>
+lc = DefineNumber[ 0.1, Name "Parameters/lc" ];
+dx = DefineNumber[ 0.1, Name "Parameters/dx" ];
+dy = DefineNumber[ 0.1, Name "Parameters/dy" ];
+dz = DefineNumber[ 0.1, Name "Parameters/dz" ];
+Box(1) = {0,0,0, dx,dy,dz}; <i class="conum" data-value="2"></i><b>(2)</b>
+
+// get boundary??
+Physical Volume("Cube") = {1};</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Switch from 'Built-In' to 'OpenCASCADE' kernel</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Create a rectangular box
+<div class="ulist">
+<ul>
+<li>
+<p>previous examples using CSG</p>
+</li>
+</ul>
+</div></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_of_python_gmsh_api"><a class="anchor" href="#_use_of_python_gmsh_api"></a>5. Use of python Gmsh API</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_exercises"><a class="anchor" href="#_exercises"></a>5.1. Exercises</h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_of_salome_for_more_complex_geometries"><a class="anchor" href="#_use_of_salome_for_more_complex_geometries"></a>6. Use of Salome for more complex geometries</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-links">
+      <div class="col">
+        <div class="footer-logo">
+          <a href="https://www.cemosis.fr" class="icon">
+            <img src="../../../_/img/logoCemosisTransparent.png" alt="Cemosis">
+          </a>
+        </div>
+      </div>
+      <div class="col">
+        <ul>
+          <li><a href="https://docs.cemosis.fr" target="_blank" rel="noopener">Projects Documentation</a></li>
+          <li><a href="https://join.slack.com/t/feelpp/shared_invite/zt-2qe0q9hw-4pVbhohCXUE6Po9Ma8dbiQ" target="_blank" rel="noopener">Forums(Slack)</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul>
+          <li><a href="https://www.cemosis.fr" target="_blank" rel="noopener">Cemosis</a></li>
+          <li><a href="https://www.cemosis.fr/news" target="_blank" rel="noopener">News</a></li>
+          <li><a href="https://www.cemosis.fr/projects" target="_blank" rel="noopener">Projects</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul>
+          <li><a href="https://docs.feelpp.org" target="_blank" rel="noopener">Feel++ Documentation</a></li>
+          <li><a href="http://docs.feelpp.org/user/">Get Started</a></li>
+          <li><a href="http://docs.feelpp.org/user//install/distributions/">Downloads</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul class="social-icons">
+          <li>
+            <svg  width="14" height="14" viewBox="0 0 32 32"> <path id="facebook" class="cls-1" d="M29,0H3A2.652,2.652,0,0,0,0,3V29a2.652,2.652,0,0,0,3,3H16V18H12V14h4V12a6.452,6.452,0,0,1,6-6h4v4H22a2.151,2.151,0,0,0-2,2v2h6l-1,4H20V32h9a2.652,2.652,0,0,0,3-3V3A2.652,2.652,0,0,0,29,0Z"/></svg>
+            <a href="https://www.facebook.com/cemosis.fr" class="icon">
+            Facebook
+            </a>
+          </li>
+          <li>
+            <svg  width="14" height="14" viewBox="0 0 32.1 26.1"> <path id="twitter" class="cls-1" d="M32,7.1a11.836,11.836,0,0,1-3.8,1,6.462,6.462,0,0,0,2.9-3.6,12.606,12.606,0,0,1-4.2,1.6A6.492,6.492,0,0,0,22.1,4a6.594,6.594,0,0,0-6.6,6.6,7.719,7.719,0,0,0,.2,1.5A18.458,18.458,0,0,1,2.2,5.2a6.294,6.294,0,0,0-.9,3.3A6.765,6.765,0,0,0,4.2,14a6.109,6.109,0,0,1-3-.8v.1a6.543,6.543,0,0,0,5.3,6.4,4.678,4.678,0,0,1-1.7.2,4.869,4.869,0,0,1-1.2-.1,6.679,6.679,0,0,0,6.1,4.6,12.917,12.917,0,0,1-8.2,2.8,9.151,9.151,0,0,1-1.6-.1,18.438,18.438,0,0,0,10.1,3c12.1,0,18.7-10,18.7-18.7v-.8A13.336,13.336,0,0,0,32,7.2Z" transform="translate(0.1 -4)"/></svg>
+            <a href="https://twitter.com/cemosis" class="icon">
+              Twitter
+            </a>
+          </li>
+          <li>
+          <svg  width="14" height="14" viewBox="0 0 32 32"> <path id="linkedin" class="cls-1" d="M29,0H3A3.076,3.076,0,0,0,0,3V29a3.009,3.009,0,0,0,3,3H29a2.946,2.946,0,0,0,3-3V3A3.009,3.009,0,0,0,29,0ZM12,26H8V12h4ZM10,10a2,2,0,1,1,2-2A2.006,2.006,0,0,1,10,10ZM26,26H22V18a2,2,0,0,0-4,0v8H14V12h4v2.5c.8-1.1,2.1-2.5,3.5-2.5A4.736,4.736,0,0,1,26,17Z"/></svg>
+              <a href="https://www.linkedin.com/company/cemosis" class="icon">
+             Linkedin
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-terms">
+      <div class="footer-terms-copyright">
+          <span>© 2024 Cemosis, Université de Strasbourg</span>
+      </div>
+      <div class="footer-terms-links">
+        <a href="https://www.cemosis.fr/terms-of-use">Terms of Use</a>
+        <a href="https://www.cemosis.fr/privacy-policy">Privacy Policy</a>
+        <a href="https://www.cemosis.fr/cookie-policy">Cookie Policy</a>
+        <a href="https://www.cemosis.fr/support-policy">Support Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+
+
+<script async src="../../../_/js/vendor/fontawesome-icon-defs.js"></script>
+<script async src="../../../_/js/vendor/fontawesome.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+
+
+<script type="text/javascript">
+function toggleFullScreen() {
+   var doc = window.document;
+   var docEl = doc.documentElement;
+
+   var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+   var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+   if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+       requestFullScreen.call(docEl);
+   }
+   else {
+       cancelFullScreen.call(doc);
+   }
+}
+</script>
+  </body>
+</html>

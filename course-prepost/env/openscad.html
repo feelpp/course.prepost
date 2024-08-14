@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>CMake Environment :: Course Project Dash</title>
-    <link rel="canonical" href="https://trophime.github.io/CSMI-PrePost/course-project-dash/env/cmake.html">
+    <title>OpenScad Environment :: PrePost Processing for Scientific Computing</title>
+    <link rel="canonical" href="https://trophime.github.io/CSMI-PrePost/course-prepost/env/openscad.html">
     <meta name="generator" content="Antora 3.1.8">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
@@ -112,7 +112,7 @@ MathJax.Hub.Config({
         <div class="navbar-item search hide-for-print">
           <form class="search">
             <i class="fa-solid fa-search"></i>
-            <input type="text" placeholder="Search Course Project Dash" class="query" id="search-query">
+            <input type="text" placeholder="Search PrePost Processing for Scientific Computing" class="query" id="search-query">
           </form>
         </div>
         <div class="navbar-item has-dropdown is-hoverable">
@@ -163,12 +163,12 @@ MathJax.Hub.Config({
 </header>
 <div class="body">
 <a href="#" class="menu-expand-toggle"></a>
-<div class="nav-container" data-component="course-project-dash" data-version="">
+<div class="nav-container" data-component="course-prepost" data-version="">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="../index.html">Template Project</a></h3>
+    <h3 class="title"><a href="../index.html">PrePost Processing for Scientific Computing</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -176,18 +176,33 @@ MathJax.Hub.Config({
     <a class="nav-link" href="../index.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../quickstart.html">Quickstart</a>
+    <a class="nav-link" href="../domain.html">Domain modeling and representation</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../overview.html">Overview</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../pre.html">PreProcessing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../pre/cad/cad.html">Computer Aided Design (CAD)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../pre/mesh/mesh.html">Preprocessing Mesh</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">PostProcessing</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../post/post.html">PostProcessing</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Setting up the development Environment</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="cmake.html">CMake Environment</a>
-  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="antora.html">Antora Environment</a>
   </li>
@@ -195,13 +210,62 @@ MathJax.Hub.Config({
     <a class="nav-link" href="vscode.html">VS Code Integration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="githubactions.html">GitHub Actions</a>
+    <a class="nav-link" href="gmsh.html">Gmsh</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="rename.html">Renaming the Project</a>
+    <a class="nav-link" href="salome.html">Salome</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="feelpp.html">Feel++</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="container.html">Containers</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jupyter.html">Jupyter Notebook</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">References</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../software.html">Software</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../books.html">books</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../acknowledgements.html">Acknowledgements</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../exos/index.html">Exercices</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../exos/gmsh/simple.html">Gmsh </a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../exos/gmsh/occ.html">Gmsh with OpenCascade</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../exos/gmsh/mesh.html">Gmsh - first meshes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../exos/gmsh/adapt.html">Gmsh - adapt meshes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../exos/salome/simple.html">Salome CAD Modeler</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../exos/salome/mesh.html">Salome Netgen Mesher</a>
   </li>
 </ul>
   </li>
@@ -212,12 +276,12 @@ MathJax.Hub.Config({
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Template Project</span>
+    <span class="title">PrePost Processing for Scientific Computing</span>
     <span class="version"></span>
   </div>
   <ul class="components">
       <li class="component is-current">
-        <a class="title" href="../index.html">Template Project</a>
+        <a class="title" href="../index.html">PrePost Processing for Scientific Computing</a>
       </li>
   </ul>
 </div>
@@ -230,14 +294,13 @@ MathJax.Hub.Config({
     <a href="../index.html" class="home-link"></a>
   <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="../index.html">Template Project</a></li>
-    <li>Setting up the development Environment</li>
-    <li><a href="cmake.html">CMake Environment</a></li>
+    <li><a href="../index.html">PrePost Processing for Scientific Computing</a></li>
+    <li><a href="openscad.html">OpenScad Environment</a></li>
   </ul>
 </nav>
 
   
-    <div class="edit-this-page"><a href="https://github.com/Trophime/CSMI-PrePost/edit/master/docs/modules/ROOT/pages/env/cmake.adoc">Edit this Page</a></div>
+    <div class="edit-this-page"><a href="https://github.com/Trophime/CSMI-PrePost/edit/master/docs/modules/ROOT/pages/env/openscad.adoc">Edit this Page</a></div>
   
   <div class="page-downloads">
   <span class="label">Download as</span>
@@ -257,83 +320,8 @@ MathJax.Hub.Config({
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">CMake Environment</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>The CMakeLists.txt is setup with Feel++.
-A sample Feel++ application is available in <code>src</code>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_building"><a class="anchor" href="#_building"></a>1. Building</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The CMakeLists.txt is configured to build the application in <code>src</code>.
-The following commands can be used to build the application:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> $ cmake --preset default <i class="conum" data-value="1"></i><b>(1)</b>
- $ cmake --build --preset default <i class="conum" data-value="2"></i><b>(2)</b>
- $ cmake --build --preset default -t install <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Configure the project</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Build the project</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Install the project</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_packaging"><a class="anchor" href="#_packaging"></a>2. Packaging</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>CPack is configured and allows to generate a binary and source package.
-Use the following commands to generate the binary package:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ cmake --build --preset default -t package</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Use the following commands to generate the source package:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ cmake --build --preset default -t package_source</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_testing"><a class="anchor" href="#_testing"></a>3. Testing</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>CTest is configured.
-Use the following command to run the tests:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ cmake --build --preset default -t test</pre>
-</div>
-</div>
-</div>
-</div>
+<h1 class="page">OpenScad Environment</h1>
+
 </article>
   </div>
 </main>
