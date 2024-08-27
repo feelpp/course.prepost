@@ -449,7 +449,7 @@ MathJax.Hub.Config({
 <h3 id="_basic_usage_a_square"><a class="anchor" href="#_basic_usage_a_square"></a>3.1. Basic Usage: a square</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">setFactory("Built-in"); <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-gmsh hljs" data-lang="gmsh">setFactory("Built-in"); <i class="conum" data-value="1"></i><b>(1)</b>
 
 h = 1; <i class="conum" data-value="2"></i><b>(2)</b>
 Point(1) = {0, 0, 0, h};  <i class="conum" data-value="3"></i><b>(3)</b>
@@ -531,7 +531,7 @@ The square can now be meshed by typing 2 on the keyboard (or maybe shift + 2) or
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">...
+<pre class="highlightjs highlight"><code class="language-gmsh hljs" data-lang="gmsh">...
 h =DefineNumber[ 0.1, Name "Parameters/MeshSize" ]; <i class="conum" data-value="1"></i><b>(1)</b>
 dx = DefineNumber[ 0.1, Name "Parameters/dx" ];
 
@@ -568,7 +568,7 @@ Perform an elevation of Surface 1 to get a cube.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">...
+<pre class="highlightjs highlight"><code class="language-gmsh hljs" data-lang="gmsh">...
 dz = DefineNumber[ 0.1, Name "Parameters/dz" ];
 
 out[] = Extrude {0, 0, dz} {Surface{1};}; <i class="conum" data-value="1"></i><b>(1)</b>
@@ -606,7 +606,7 @@ by using the return value (a list) of the Extrude command. This list contains:
 <h3 id="_academic_cube_with_hole"><a class="anchor" href="#_academic_cube_with_hole"></a>3.2. "academic" cube with hole</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">...
+<pre class="highlightjs highlight"><code class="language-gmsh hljs" data-lang="gmsh">...
 r =DefineNumber[ 0.1, Name "Parameters/HoleRadius" ];
 
 Point(5) = {dx/2.-r, 0, 0, h/4.};   <i class="conum" data-value="1"></i><b>(1)</b>
@@ -661,7 +661,7 @@ Store the Line Loop in an array</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">Macro CHole
+<pre class="highlightjs highlight"><code class="language-gmsh hljs" data-lang="gmsh">Macro CHole
     O=newp; Point(O) = {x0,y0,0,h};
     p1=newp; Point(p1) = { x0+r,  y0, 0, h_h};
     p2=newp; Point(p2) = { x0+0,  y0+r, -dz, h_h};
@@ -682,7 +682,7 @@ Return</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">...
+<pre class="highlightjs highlight"><code class="language-gmsh hljs" data-lang="gmsh">...
 nx =DefineNumber[ 1, Name "Parameters/HoleNumbersAlongOX" ];
 ny =DefineNumber[ 1, Name "Parameters/HoleNumbersAlongOY" ];
 
@@ -727,7 +727,7 @@ bord = newl; Plane Surface(bord) = {1, -loop[]};
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">setFactory("Built-in"); <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-gmsh hljs" data-lang="gmsh">setFactory("Built-in"); <i class="conum" data-value="1"></i><b>(1)</b>
 lc = DefineNumber[ 0.1, Name "Parameters/lc" ];
 dx = DefineNumber[ 0.1, Name "Parameters/dx" ];
 dy = DefineNumber[ 0.1, Name "Parameters/dy" ];
