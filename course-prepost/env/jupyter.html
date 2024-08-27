@@ -341,6 +341,42 @@ MathJax.Hub.Config({
 <div class="paragraph">
 <p>You write your notebook in AsciiDoc including LaTeX math and thanks to the <code>:page-jupyter: true</code> attribute, the notebook is converted to a Jupyter notebook when the book is built.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To run the notebook in {vscode}:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>create a python virtual env</p>
+</li>
+<li>
+<p>install the required packages from 'requirements.tx'</p>
+</li>
+<li>
+<p>start vscode within this python virtual env</p>
+</li>
+<li>
+<p>select the kernel to use: use the previously created virtual env</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To run the notebook, you can also use this docker image</p>
+</div>
+<div class="paragraph">
+<p>To run the notebook in an already install jupyter</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -358,24 +394,42 @@ print("Hello, world!")</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_feel_code_cells"><a class="anchor" href="#_feel_code_cells"></a>3. Feel++ Code cells</h2>
+<h2 id="_mesh"><a class="anchor" href="#_mesh"></a>3. Mesh</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can check that <code>pyvista</code> package is running as expected:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import pyvista as pv
+# uncomment the next line, if you don't have a nvidia graphic card
+# pv.start_xvfb()
+mesh = pv.Plane().triangulate()
+submesh = mesh.subdivide(2, 'linear')
+submesh.plot(show_edges=True)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_feel_code_cells"><a class="anchor" href="#_feel_code_cells"></a>4. Feel++ Code cells</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You can include Feel++ code cells in your notebook using the <code>[source,python]</code> block macro.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import feelpp
-app = feelpp.Environment(["myapp"],config=feelpp.globalRepository("myapp"))
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import feelpp.core as fppc
+app = fppc.Environment(["myapp"],config=fppc.globalRepository("myapp"))
 
-geo=feelpp.download( "github:{repo:feelpp,path:feelpp/quickstart/laplacian/cases/feelpp2d/feelpp2d.geo}", worldComm=app.worldCommPtr() )[0]
+geo=fppc.download( "github:{repo:feelpp,path:feelpp/quickstart/laplacian/cases/feelpp2d/feelpp2d.geo}", worldComm=app.worldCommPtr() )[0]
 print("geo file: {}".format(geo))
-mesh = feelpp.load(feelpp.mesh(dim=2,realdim=2), geo, 0.1)
+mesh = fppc.load(fppc.mesh(dim=2,realdim=2), geo, 0.1)
 
-Xh=feelpp.functionSpace(mesh=mesh, space="Pchv")
+Xh=fppc.functionSpace(mesh=mesh, space="Pchv")
 f = Xh.element()
-f.on(range=feelpp.elements(mesh),expr=feelpp.expr("{sin(pi*x)*sin(pi*y),cos(pi*x)*cos(pi*y)}:x:y",row=2,col=1))
-e= feelpp.exporter(mesh=mesh)
+f.on(range=fppc.elements(mesh),expr=fppc.expr("{sin(pi*x)*sin(pi*y),cos(pi*x)*cos(pi*y)}:x:y",row=2,col=1))
+e= fppc.exporter(mesh=mesh)
 e.add("f",f)
 e.save()</code></pre>
 </div>
@@ -385,12 +439,8 @@ e.save()</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">from xvfbwrapper import Xvfb
-vdisplay = Xvfb()
-vdisplay.start()
-
-import pyvista as pv
-pv.set_jupyter_backend('panel')
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import pyvista as pv
+# pv.start_xvfb()
 reader = pv.get_reader("exports/ensightgold/Exporter/Exporter.case")
 mesh = reader.read()
 mesh.plot(scalars="f",show_edges=True)</code></pre>
