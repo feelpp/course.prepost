@@ -14,7 +14,7 @@ pyvista[all]
 xvfbwrapper
 pythreejs
 requests
-pandas
+pandas < 2.2
 tabulate
 nbformat>=4.2.0
 pandoc
