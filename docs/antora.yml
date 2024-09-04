@@ -4,6 +4,7 @@ version: ~
 start_page: index.adoc
 asciidoc:
   attributes:
+    page-pagination: '@'
     project_name: Course PrePost Processing
     numbered: true
     allow-uri-read: true
