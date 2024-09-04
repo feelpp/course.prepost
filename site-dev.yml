@@ -20,6 +20,7 @@ antora:
   - '@antora/collector-extension'
 asciidoc:
   attributes:
+    dynamic-blocks@: ''
     uri-github: https://github.com/
     uri-org-feelpp: https://github.com/feelpp/
     uri-github-feelpp: https://github.com/feelpp/feelpp/
